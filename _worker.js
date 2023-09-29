@@ -1,3 +1,8 @@
+function replaceHost(url) {
+  return new URL(url, {
+    hostname: "ieltsfigher.pages.dev"
+  });
+}
 export default {
     async fetch(request, env) {
       let url = new URL(request.url);
