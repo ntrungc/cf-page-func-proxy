@@ -4,10 +4,7 @@ export default {
 
     // Check if the request is for a different domain
     if (url.hostname === "khoahoc.vietjack.com") {
-      // Replace the domain with the original one
-      url.hostname = "khoahoc.vietjack.com";
-      let new_request = new Request(url, request);
-      const response = await fetch(new_request);
+      let response = await env.ASSETS.fetch(request);
 
       // Check if the response is an HTML file
       if (response.headers.get("content-type").includes("text/html")) {
@@ -21,7 +18,7 @@ export default {
         htmlText = htmlText.replace('</body>', injectedScript + '</body>');
 
         // Create a new response with the modified HTML
-        return new Response(htmlText, {
+        response = new Response(htmlText, {
           status: response.status,
           statusText: response.statusText,
           headers: response.headers,
