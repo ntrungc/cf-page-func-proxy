@@ -1,16 +1,12 @@
 export default {
-  async fetch(request, env) {
-    let url = new URL(request.url);
-
-    // Check if the request is for a different domain
-    if (url.hostname === "khoahoc.vietjack.com") {
-      // Replace the domain with "ieltsfighter.pages.dev"
-      url.hostname = "ieltsfighter.pages.dev";
-      let new_request = new Request(url, request);
-      return fetch(new_request);
+    async fetch(request, env) {
+      let url = new URL(request.url);
+      if (url.pathname.startsWith('/')) {
+        url.hostname="ielts-fighter.com";
+        let new_request=new Request(url,request);
+        return fetch(new_request);
+      }
+      // Otherwise, serve the static assets.
+      return env.ASSETS.fetch(request);
     }
-
-    // Otherwise, serve the static assets.
-    return env.ASSETS.fetch(request);
-  }
-};
+  };
