@@ -1,4 +1,4 @@
-nhưng làm sao để thêm vào đoạn code export default {
+export default {
     async fetch(request, env) {
       let url = new URL(request.url);
       if (url.pathname.startsWith('/')) {
